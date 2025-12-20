@@ -13,6 +13,7 @@ import (
 
 var preferredSuffixes = []string{
 	"line_power_AC",
+	"line_power_AC0",
 	"line_power_ACAD",
 	"line_power_ADP1",
 	"line_power_Mains",
