@@ -1,6 +1,7 @@
 package tui
 
 import (
+	"errors"
 	"fmt"
 	"path/filepath"
 	"strings"
@@ -122,8 +123,13 @@ func (h *HDMConfigPane) Update(msg tea.Msg) tea.Cmd {
 			logrus.Debug("Creating a new config")
 			cmds = append(cmds, profileNameToogled())
 		case key.Matches(msg, h.keymap.ApplyProfile):
-			logrus.Debug("Editing existing config")
-			cmds = append(cmds, editProfileConfirmationCmd(h.profile.Profile.Name))
+			if h.profile == nil {
+				logrus.Debug("No profile to apply")
+				cmds = append(cmds, OperationStatusCmd(OperationNameApplyProfile, errors.New("profile missing")))
+			} else {
+				logrus.Debug("Editing existing config")
+				cmds = append(cmds, editProfileConfirmationCmd(h.profile.Profile.Name))
+			}
 		case key.Matches(msg, h.keymap.EditorEdit):
 			cmds = append(cmds, openEditor(h.profile.Profile.ConfigFile))
 		case key.Matches(msg, h.keymap.RenderProfile):
