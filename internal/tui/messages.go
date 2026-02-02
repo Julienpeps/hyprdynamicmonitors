@@ -109,6 +109,7 @@ const (
 	OperationNameCreateProfile
 	OperationNameMatchingProfile
 	OperationNameEditProfile
+	OperationNameApplyProfile
 	OperationNameHDMConfigReloadRequested
 	OperationNameNextBitdepth
 	OperationNameSetColorPreset
@@ -160,6 +161,8 @@ func (o OperationStatus) String() string {
 		operationName = "Reload Profile"
 	case OperationNameEditProfile:
 		operationName = "Edit Profile"
+	case OperationNameApplyProfile:
+		operationName = "Apply Profile"
 	case OperationNameHDMConfigReloadRequested:
 		operationName = "HDM Config Reload"
 	case OperationNameNextBitdepth:
